@@ -20,6 +20,36 @@ def printKeyVals(data, indent=0):
     else:
         print data
 
+def testData(method, url, jsonbody, expected):
+  print "method",method
+  print "url",url
+  print "jsonbody",jsonbody
+  print "expexted",expected
+  print
+  call = apiurl + '/' + username + url + apiToken
+
+  if method == "GET":
+    response = requests.get(call)
+  elif method == "PUT":
+    response = requests.put(call)
+    
+  print "---status code---"
+  print response.status_code
+  print "---headers---"
+  print response.headers
+  print "---text---"
+  print response.text
+  print "---json---"
+  print response.json()
+  print "---json_data---"
+  print json_data
+  print "---response.to_str---"
+  print response.text
+
+  test = printKeyVals(json_data)
+
+
+
 apiToken = os.environ.get("DISTELLI_APITOKEN")
 username = os.environ.get("DISTELLI_USERNAME")
 
@@ -30,15 +60,15 @@ if apiToken is None or username is None:
   sys.exit()
 
 #Test CreatApp 
-url = '/apps/TestApp1?apiToken='
-jsonbody = '{"description":"Test App 1 description"}'
-call = apiurl + '/' + username + url + apiToken
+#url = '/apps/TestApp1?apiToken='
+#jsonbody = '{"description":"Test App 1 description"}'
+#call = apiurl + '/' + username + url + apiToken
 #response = requests.put(call, data=jsonbody)
 #print (response.text)
 
 #Test GetApp
-url = '/apps/TestApp1?apiToken='
-call = apiurl + '/' + username + url + apiToken
+#url = '/apps/TestApp1?apiToken='
+#call = apiurl + '/' + username + url + apiToken
 #response = requests.get(call)
 
 #Test GetRelease
@@ -48,32 +78,17 @@ response = requests.get(call)
 
 json_data = json.loads(response.text)
 
-print "---status code---"
-print response.status_code
-print "---headers---"
-print response.headers
-print "---text---"
-print response.text
-print "---json---"
-print response.json()
-print "---json_data---"
-print json_data
-print "---response.to_str---"
-print response.text
-#print "---decoded?---"
-#print u
-
-test = printKeyVals(json_data)
-
 csv.register_dialect('singlequote', quotechar="'", quoting=csv.QUOTE_ALL)
 
 with open('api_test_data.txt') as test_data:
   reader = csv.reader(test_data, dialect='singlequote')
   for row in reader:
-    print "row",row
-    for field in row:
-      print "field",field
-
+    #print "row",row
+    method = row[0]
+    url = row[1]
+    jsonbody = row[2]
+    expected = row[3]
+    test = testData(method, url, jsonbody, expected)
 
 #test_data.close()
 
