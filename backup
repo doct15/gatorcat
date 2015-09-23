@@ -31,7 +31,21 @@ def testData(method, url, jsonbody, expected):
   if method == "GET":
     response = requests.get(call)
   elif method == "PUT":
-    response = requests.put(call)
+    response = requests.put(call, data=jsonbody)
+  elif method == "POST":
+    response = requests.post(call, data=jsonbody)
+  elif method == "DELETE":
+    #print "This is DELETE"
+    #try:
+    response = requests.delete(call)
+    #except ValueError:
+    #  print "ERROR"
+    #  pass
+    #else:
+    #  print "ERR2"
+    #  pass
+  elif method == "PATCH":
+    response = requests.patch(call, data=jsonbody)
     
   print "---status code---"
   print response.status_code
@@ -40,7 +54,11 @@ def testData(method, url, jsonbody, expected):
   print "---text---"
   print response.text
   print "---json---"
-  print response.json()
+  try:
+    print response.json()
+  except ValueError:
+    print "NO JSON BODY"
+    pass
   print "---json_data---"
   print json_data
   print "---response.to_str---"
