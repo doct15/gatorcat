@@ -2,7 +2,6 @@ import requests
 import json
 import os
 import sys
-#from csv import reader
 import csv
 
 debug=1
@@ -65,17 +64,6 @@ print response.text
 #print u
 
 test = printKeyVals(json_data)
-
-#Open test data file
-cnt=0
-#with open("api_test_data.txt","r") as test_data:
-#  for line in reader(test_data):
-#    print "LINE:",line
-#    for cmd in line:
-#      print cnt, cmd
-#      cnt += 1
-#    if 'str' in line:
-#      break
 
 csv.register_dialect('singlequote', quotechar="'", quoting=csv.QUOTE_ALL)
 
