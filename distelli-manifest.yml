@@ -1,0 +1,12 @@
+bmcgehee/a1:
+  Env:
+    - VAR1: "inmanifest1"
+    - VAR2: "inmanifest2"
+    - VAR3: "inmanifest3"
+    - VAR4: "inmanifest4"
+  PostInstall:
+    - echo "VAR1: $VAR1"
+    - echo "VAR2: $VAR2"
+    - echo "VAR3: $VAR3"
+    - echo "VAR4: $VAR4"
+    
