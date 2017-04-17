@@ -1,0 +1,2 @@
+'Create Passly User','PUT','/users','{"name":"Example User","email":"example@example.com","username":"PasslyUser","user_id":"example"}','{"passly_id":***}'
+'Get Passly User by eMail','GET','/users/email/example@example.com','','{"passly_id":***,"name":"Example User","email":"example@example.com","username":"PasslyUser","user_id":"example","created":"***DATE-TIME-NOW****"}'
